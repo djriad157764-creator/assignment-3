@@ -101,5 +101,3 @@ function analyzeText(sentence) {
     token,
   }
 }
-let summary = analyzeText("");
-console.log(summary);
