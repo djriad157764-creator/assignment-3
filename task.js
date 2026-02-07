@@ -51,7 +51,7 @@ function finalScore(omr) {
   let omrs = omr.right + omr.wrong + omr.skip;
 
   if (omrs !== 100) {
-    return "invalid";
+    return "Invalid";
   }
   let rightAnswer = omrs - omr.wrong - omr.skip;
   let worngAnswer = omrs - omr.right - omr.skip;
@@ -60,3 +60,32 @@ function finalScore(omr) {
 }
 const BCSFinalScore = finalScore({ right: 30, wrong: 30, skip: 40 });
 console.log(BCSFinalScore);
+
+// Problem-04: Upcoming Gono Vote
+
+function gonoVote(array) {
+  let haVote = "ha";
+  let naVote = "na";
+  let haCount = 0;
+  let naCount = 0;
+  if(!Array.isArray(array)){
+    return "Invalid"
+  }
+  for (let arr of array) {
+    if (arr === haVote) {
+      haCount++;
+    } else if (arr === naVote) {
+      naCount++;
+    }
+  }
+  if (haCount > naCount) {
+    return true;
+  } else if (haCount === naCount) {
+    return "equal";
+  } else {
+    return false;
+  }
+}
+
+const voteWin = gonoVote(null);
+console.log(voteWin);

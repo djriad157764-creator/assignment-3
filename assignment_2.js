@@ -26,9 +26,9 @@ function newPrice(currentPrice, discount) {
     discount > 100
   ) {
     return "Invalid";
-  } else {
-    discountAmount = (currentPrice * discount) / 100;
   }
+  discountAmount = (currentPrice * discount) / 100;
+
   newAmount = currentPrice - discountAmount;
   return newAmount.toFixed(3);
 }
@@ -76,18 +76,15 @@ const output = newPrice(1200, 7);
 let otp = "ph-10985";
 
 function validOtp(otp) {
+  if (typeof otp !== "string" || !otp.startsWith("ph-") || otp.length !== 8) {
+    return false;
+  }
   if (
     Array.isArray(otp) ||
     typeof otp === "number" ||
     typeof otp === "object"
   ) {
     return "Invalid";
-  } else if (
-    typeof otp !== "string" ||
-    !otp.startsWith("ph-") ||
-    otp.length !== 8
-  ) {
-    return false;
   } else {
     return true;
   }
@@ -133,24 +130,21 @@ let finalOtp = validOtp(otp);
 // ফাংশনের কাজ: ফাংশনটি ইনপুট হিসেবে একটি Object নেবে এবং নিচের শর্ত ও নিয়ম অনুযায়ী ফলাফল প্রদান করবে।
 
 function finalScore(omr) {
-  // let rightAnswer = 0;
-  // let worngAnswer = 0;
-  // let finalScore = 0;
   let worngAnswerPoint = 0.5;
   if (typeof omr !== "object") {
     return "Invalid";
   }
   let omrs = omr.right + omr.wrong + omr.skip;
-  // console.log(omrs)
+
   if (omrs !== 100) {
-    return "invalid";
+    return "Invalid";
   }
   let rightAnswer = omrs - omr.wrong - omr.skip;
   let worngAnswer = omrs - omr.right - omr.skip;
   let finalScore = rightAnswer - worngAnswerPoint * worngAnswer;
   return Math.round(finalScore);
 }
-const BCSFinalScore = finalScore({ right: 30, wrong: 30, skip: 40 });
+const BCSFinalScore = finalScore();
 // console.log(BCSFinalScore);
 // console.log( {right: 67, wrong: 23, skip: 10} )
 // 📥 Input:
@@ -196,6 +190,36 @@ const BCSFinalScore = finalScore({ right: 30, wrong: 30, skip: 40 });
 // ⚠️ Function Name Must be gonoVote()
 // আসন্ন গণভোটের ফলাফল বিশ্লেষণের জন্য তোমাকে একটি দায়িত্ব দেওয়া হয়েছে। ভোটের ডাটাগুলো একটি Array-তে জমা করা হয়েছে যেখানে ভোটারদের মতামত "ha" অথবা "na" হিসেবে আছে। তোমার কাজ হলো একটি ফাংশন তৈরি করা যা ভোট গণনা করবে এবং দেখবে "ha" ভোট সংখ্যাগরিষ্ঠ (Majority) কি না।
 // ফাংশনের কাজ: ফাংশনটি ইনপুট হিসেবে একটি Array নেবে এবং ভোটের সংখ্যার ওপর ভিত্তি করে একটি Boolean (true/false) অথবা equal (string) রিটার্ন করবে।
+
+function gonoVote(array) {
+  let haVote = "ha";
+  let naVote = "na";
+  let haCount = 0;
+  let naCount = 0;
+  if (!Array.isArray(array)) {
+    return "Invalid";
+  }
+  for (let arr of array) {
+    if (arr === haVote) {
+      haCount++;
+    } else if (arr === naVote) {
+      naCount++;
+    }
+  }
+  if (haCount > naCount) {
+    return true;
+  }else if(haCount === 0 && naCount === 0 ){
+    return "Invalid"
+  } else if (haCount === naCount) {
+    return "equal";
+  } else {
+    return false;
+  }
+}
+
+const voteWin = gonoVote(['ha','na']);
+console.log(voteWin);
+
 // 📥 Input:
 // ইনপুট হবে একটি Array। যেমন: ["ha", "na", "ha"]
 
@@ -238,6 +262,27 @@ const BCSFinalScore = finalScore({ right: 30, wrong: 30, skip: 40 });
 // এই তথ্যগুলো ব্যবহার করে জিহাদ একটি ছোট summary তৈরি করতে পারবে।
 // 👉 তোমার কাজ হলো এই লজিক ব্যবহার করে একটি ফাংশন তৈরি করা।
 // ফাংশনের কাজ: ফাংশনটি ইনপুট হিসেবে একটি String নেবে এবং একটি Object রিটার্ন করবে যেখানে সবচেয়ে বড় শব্দ এবং মোট ক্যারেক্টার সংখ্যা থাকবে।
+
+function analyzeText(sentence) {
+  let longwords = "";
+
+  if (typeof sentence !== "string" || sentence.trim().length === 0) {
+    return "Invalid";
+  }
+  let string = sentence.split(" ");
+  let token = string.join("").length;
+  for (let str of string) {
+    if (str.length > longwords.length) {
+      longwords = str;
+    }
+  }
+  return {
+    longwords,
+    token,
+  }
+}
+let summary = analyzeText("");
+console.log(summary);
 
 // 📥 Input:
 // ইনপুট হবে একটি String (একটি পূর্ণ বাক্য/ Sentence)।
