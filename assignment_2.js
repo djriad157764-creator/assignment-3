@@ -32,8 +32,8 @@ function newPrice(currentPrice, discount) {
   newAmount = currentPrice - discountAmount;
   return newAmount.toFixed(3);
 }
-const output = newPrice(1200, 7 );
-console.log(output);
+const output = newPrice(1200, 7);
+// console.log(output);
 
 // Input :
 
@@ -131,6 +131,28 @@ let finalOtp = validOtp(otp);
 // ⚠️ Function Name Must be finalScore()
 // BCS পরীক্ষার OMR sheet ডিজিটালভাবে চেক করা হয়। এটা right, wrong, missed সব কটি গণনা করতে পারে, কিন্তু ফাইনাল স্কোর বের করতে পারে না। তোমার কাজ হলো একটি ফাংশন বানানো যা Object নেবে এবং ফাইনাল স্কোর ক্যালকুলেট করবে।
 // ফাংশনের কাজ: ফাংশনটি ইনপুট হিসেবে একটি Object নেবে এবং নিচের শর্ত ও নিয়ম অনুযায়ী ফলাফল প্রদান করবে।
+
+function finalScore(omr) {
+  // let rightAnswer = 0;
+  // let worngAnswer = 0;
+  // let finalScore = 0;
+  let worngAnswerPoint = 0.5;
+  if (typeof omr !== "object") {
+    return "Invalid";
+  }
+  let omrs = omr.right + omr.wrong + omr.skip;
+  // console.log(omrs)
+  if (omrs !== 100) {
+    return "invalid";
+  }
+  let rightAnswer = omrs - omr.wrong - omr.skip;
+  let worngAnswer = omrs - omr.right - omr.skip;
+  let finalScore = rightAnswer - worngAnswerPoint * worngAnswer;
+  return Math.round(finalScore);
+}
+const BCSFinalScore = finalScore({ right: 30, wrong: 30, skip: 40 });
+// console.log(BCSFinalScore);
+// console.log( {right: 67, wrong: 23, skip: 10} )
 // 📥 Input:
 // একটি Object যার প্রপার্টিগুলো হবে: { right: Number, wrong: Number, skip: Number }
 
