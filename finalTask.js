@@ -150,6 +150,7 @@ function gonoVote(voters) {
     return false;
   }
 }
+
 // console.log(gonoVote(["ha", "na", "ha", "na"]));
 // console.log(gonoVote(["ha", "na", "na"]));
 // console.log(gonoVote(["ha", "ha", "ha", "na"]));
@@ -194,6 +195,7 @@ function analyzeText(sentence) {
     token,
   };
 }
+
 // console.log(analyzeText("I am a little honest person"));
 // console.log(analyzeText(12345));
 // console.log(analyzeText([87,9]));
