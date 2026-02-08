@@ -99,23 +99,3 @@ function analyzeText(sentence) {
     token,
   }
 }
-console.log(analyzeText("I am a little honest person"));
-console.log(analyzeText(12345));
-console.log(analyzeText([87,9]));
-console.log(analyzeText("Hello world"));
-console.log(analyzeText({name:"Md Riad"}));
-console.log(analyzeText("Keep coding keep shining"));
-console.log(analyzeText(null));
-console.log(analyzeText(undefined));
-console.log(analyzeText(NaN));
-console.log('sdsdfja',analyzeText(""));
-// SAMPLE INPUT
-// SAMPLE OUTPUT
-// "I am a little honest person"
-// { longwords: "little", token: 22 }
-// "Hello world"
-// { longwords: "Hello", token: 10 }
-// "Keep coding keep shining"
-// { longwords: "shining", token: 21 }
-// 12345
-// Invalid
